@@ -1,4 +1,12 @@
 {
   "schema_version": 1,
-  "experiments": []
+  "experiments": [
+    {
+      "id": "coordinator-self-review",
+      "change": "Allow an explicit self_reviewed coordinator transition for single-maintainer demo repositories.",
+      "baseline": "A second GitHub reviewer is required before the coordinator can advance to merge.",
+      "success_criterion": "A maintainer can complete a validated demo workflow without misrepresenting a GitHub approval, while production guidance still recommends independent review.",
+      "follow_up": "Compare merge completion and review-related rework across demo runs before and after adoption."
+    }
+  ]
 }

@@ -64,6 +64,7 @@ def start_run(
         "developer_pr": None,
         "ci_status": "pending",
         "review_status": "pending",
+        "review_source": None,
         "repair_iterations": 0,
         "max_repair_iterations": max_repairs,
         "next_action": "architect",
@@ -79,6 +80,7 @@ def advance_run(
         "developer_pr_created": "developer",
         "ci_passed": "ci",
         "review_approved": "reviewer",
+        "self_reviewed": "reviewer",
         "review_changes_requested": "reviewer",
     }
     if event not in expected_actions:
@@ -102,6 +104,11 @@ def advance_run(
         updated["next_action"] = "reviewer"
     elif event == "review_approved":
         updated["review_status"] = "approved"
+        updated["review_source"] = "reviewer"
+        updated["next_action"] = "merge"
+    elif event == "self_reviewed":
+        updated["review_status"] = "approved"
+        updated["review_source"] = "self"
         updated["next_action"] = "merge"
     elif event == "review_changes_requested":
         iterations = state["repair_iterations"] + 1
