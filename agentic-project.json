@@ -1,0 +1,25 @@
+{
+  "project": {
+    "name": "greeter",
+    "language": "python",
+    "install_command": "pip install -e \".[dev]\"",
+    "test_command": "pytest -q",
+    "coverage_command": "pytest --cov=greeter --cov-report=term-missing --cov-report=xml -q",
+    "coverage_threshold": 90
+  },
+  "backlog": {
+    "label": "work-item",
+    "project_name": "Greeter Backlog"
+  },
+  "github": {
+    "project_owner": "example-owner",
+    "project_number": 1,
+    "project_id": "example-project-id",
+    "status_field_id": "example-status-field-id",
+    "status_options": {
+      "todo": "todo",
+      "in_progress": "in-progress",
+      "done": "done"
+    }
+  }
+}
