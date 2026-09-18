@@ -1,4 +1,15 @@
 {
   "schema_version": 3,
-  "records": []
+  "records": [
+    {
+      "pr_number": 5,
+      "title": "Add greeting punctuation option",
+      "category": "uncategorized",
+      "rejection_reasons": [],
+      "remediation_reasons": [],
+      "merged": true,
+      "closed_at": "2026-09-18T08:19:09Z",
+      "head_sha": "80896360959ad025a9670e5c80fd6aa8a19b43c2"
+    }
+  ]
 }
