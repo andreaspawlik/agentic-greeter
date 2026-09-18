@@ -10,11 +10,13 @@ metrics remain in this repository.
 The public greeting function is:
 
 ```python
-greet(name: str, punctuation: bool = True) -> str
+greet(name: str, punctuation: bool = True, capitalized: bool = False) -> str
 ```
 
 The default preserves excited punctuation. Pass `punctuation=False` to return
 the greeting without punctuation.
+Pass `capitalized=True` to uppercase the first character of the name while
+preserving surrounding whitespace.
 
 Run the configured commands with:
 

@@ -15,6 +15,14 @@ def test_greet_can_explicitly_enable_punctuation():
     assert greet("Ada", punctuation=True) == "Hello, Ada!!!"
 
 
+def test_greet_can_capitalize_name():
+    assert greet("ada", capitalized=True) == "Hello, Ada!!!"
+
+
+def test_greet_preserves_whitespace_when_capitalizing():
+    assert greet(" ada ", capitalized=True) == "Hello,  Ada !!!"
+
+
 def test_greet_preserves_surrounding_whitespace():
     assert greet(" Ada ") == "Hello,  Ada !!!"
 
@@ -34,3 +42,9 @@ def test_greet_rejects_non_string_names():
 def test_greet_rejects_non_boolean_punctuation(punctuation):
     with pytest.raises(TypeError, match="punctuation must be a boolean"):
         greet("Ada", punctuation=punctuation)
+
+
+@pytest.mark.parametrize("capitalized", [None, "true", 1])
+def test_greet_rejects_non_boolean_capitalized(capitalized):
+    with pytest.raises(TypeError, match="capitalized must be a boolean"):
+        greet("Ada", capitalized=capitalized)
