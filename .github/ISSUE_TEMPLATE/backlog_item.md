@@ -9,7 +9,8 @@ labels: backlog
 <!-- One sentence: what capability should exist after this is done? -->
 
 ## Primary category
-<!-- Choose exactly one category from the consumer project's documented taxonomy. -->
+<!-- Choose exactly one category from the consumer project's documented taxonomy.
+The issue must also receive the matching GitHub label. -->
 category:
 
 ## Acceptance criteria
