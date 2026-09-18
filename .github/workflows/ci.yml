@@ -7,16 +7,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python scripts/project_config.py run project.install_command
-      - run: python scripts/project_config.py run project.coverage_command
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage.xml
+    uses: andreaspawlik/agentic-engineering-workflows/.github/workflows/ci.yml@v1.1.0
+    with:
+      workflow_ref: v1.1.0
+    permissions:
+      contents: read
