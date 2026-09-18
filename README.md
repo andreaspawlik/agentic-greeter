@@ -2,6 +2,11 @@
 
 This is a non-calculator consumer smoke test for the shared agentic project contract.
 
+The shared agentic workflow templates are sourced from
+[`agentic-engineering-workflows`](https://github.com/andreaspawlik/agentic-engineering-workflows)
+release `v1.0.0`. Consumer-specific code, tests, Project configuration, and
+metrics remain in this repository.
+
 The public greeting function is:
 
 ```python
