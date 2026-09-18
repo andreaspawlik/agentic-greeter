@@ -12,14 +12,14 @@
     "project_name": "Greeter Backlog"
   },
   "github": {
-    "project_owner": "example-owner",
-    "project_number": 1,
-    "project_id": "example-project-id",
-    "status_field_id": "example-status-field-id",
+    "project_owner": "andreaspawlik",
+    "project_number": 2,
+    "project_id": "PVT_kwHOAGflZs4Bj4U9",
+    "status_field_id": "PVTSSF_lAHOAGflZs4Bj4U9zhicC90",
     "status_options": {
-      "todo": "todo",
-      "in_progress": "in-progress",
-      "done": "done"
+      "todo": "f75ad846",
+      "in_progress": "47fc9ee4",
+      "done": "98236657"
     }
   }
 }

@@ -9,8 +9,13 @@ import uuid
 from pathlib import Path
 from typing import Any
 
+try:
+    from scripts.project_config import config_value, load_config
+except ModuleNotFoundError:
+    from project_config import config_value, load_config
+
 MAX_REPAIR_ITERATIONS = 2
-ELIGIBLE_LABEL = "backlog"
+DEFAULT_ELIGIBLE_LABEL = "backlog"
 EXCLUDED_LABELS = {"epic", "automation-in-progress"}
 STATE_MARKER = "<!-- coordinator-state -->"
 ISSUE_REFERENCE_PATTERN = re.compile(
@@ -26,7 +31,9 @@ def parse_issue_number(value: str) -> int:
 
 
 def select_issue(
-    issues: list[dict[str, Any]], requested_number: int | None = None
+    issues: list[dict[str, Any]],
+    requested_number: int | None = None,
+    eligible_label: str = DEFAULT_ELIGIBLE_LABEL,
 ) -> dict[str, Any] | None:
     eligible = []
     for issue in issues:
@@ -34,7 +41,7 @@ def select_issue(
         body = issue.get("body") or ""
         if (
             issue.get("state") == "OPEN"
-            and ELIGIBLE_LABEL in labels
+            and eligible_label in labels
             and not labels & EXCLUDED_LABELS
             and "## Acceptance criteria" in body
             and "-" in body.split("## Acceptance criteria", 1)[1]
@@ -206,7 +213,9 @@ def main() -> None:
         requested_number = (
             parse_issue_number(sys.argv[3]) if len(sys.argv) > 3 and sys.argv[3] else None
         )
-        print(json.dumps(select_issue(issues, requested_number)))
+        config = load_config(Path("agentic-project.json"))
+        eligible_label = config_value(config, "backlog.label")
+        print(json.dumps(select_issue(issues, requested_number, eligible_label)))
     elif command == "start":
         max_repairs = int(sys.argv[3]) if len(sys.argv) > 3 else MAX_REPAIR_ITERATIONS
         run_id = sys.argv[4] if len(sys.argv) > 4 else None
