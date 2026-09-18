@@ -13,6 +13,7 @@ Your job is to review one pull request against its linked issue and report actio
 - Do not edit files or silently fix the pull request.
 - Prioritize correctness, regressions, missing tests, and acceptance-criteria gaps.
 - Treat passing CI as evidence, not proof of complete behavior.
+- Check that the pull request has the same primary category label as the linked issue. If it is missing, report a minor workflow/metrics finding and recommend the appropriate label; do not treat it as a code blocker.
 - Distinguish blocking findings from minor suggestions.
 
 ## Approach
