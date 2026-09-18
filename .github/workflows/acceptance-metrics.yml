@@ -13,7 +13,6 @@ concurrency:
 
 jobs:
   record:
-    if: github.repository == 'andreaspawlik/ai-assisted-engineering-test'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +54,8 @@ jobs:
           issue_number="$(gh pr view "${{ github.event.pull_request.number }}" --json closingIssuesReferences --jq '.closingIssuesReferences[0].number')"
           test -n "$issue_number" || exit 0
           project_owner="$(python scripts/project_config.py get github.project_owner)"
+          backlog_name="$(python scripts/project_config.py get backlog.project_name)"
           project_items="$(gh api graphql -f query='query($login:String!,$number:Int!){user(login:$login){projectV2(number:$number){items(first:100){nodes{id content{... on Issue{number}}}}}}}' -f login="$project_owner" -F number="$(python scripts/project_config.py get github.project_number)")"
           item_id="$(ISSUE_NUMBER="$issue_number" python -c 'import json, os, sys; nodes=json.load(sys.stdin)["data"]["user"]["projectV2"]["items"]["nodes"]; print(next((node["id"] for node in nodes if node.get("content", {}).get("number") == int(os.environ["ISSUE_NUMBER"])), ""))' <<< "$project_items")"
-          test -n "$item_id" || { echo "Issue #$issue_number is not in the configured Project" >&2; exit 1; }
+          test -n "$item_id" || { echo "Issue #$issue_number is not in $backlog_name" >&2; exit 1; }
           gh api graphql -f query='mutation($projectId:ID!,$itemId:ID!,$fieldId:ID!,$optionId:String!){updateProjectV2ItemFieldValue(input:{projectId:$projectId,itemId:$itemId,fieldId:$fieldId,value:{singleSelectOptionId:$optionId}}){projectV2Item{id}}}' -f projectId="$project_id" -f itemId="$item_id" -f fieldId="$status_field_id" -f optionId="$done_option" >/dev/null
