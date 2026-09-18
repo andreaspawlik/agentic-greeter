@@ -7,8 +7,8 @@ on:
 
 jobs:
   test:
-    uses: andreaspawlik/agentic-engineering-workflows/.github/workflows/ci.yml@v1.1.0
+    uses: andreaspawlik/agentic-engineering-workflows/.github/workflows/ci.yml@v1.1.1
     with:
-      workflow_ref: v1.1.0
+      workflow_ref: v1.1.1
     permissions:
       contents: read
