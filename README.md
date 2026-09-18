@@ -2,6 +2,15 @@
 
 This is a non-calculator consumer smoke test for the shared agentic project contract.
 
+The public greeting function is:
+
+```python
+greet(name: str, punctuation: bool = True) -> str
+```
+
+The default preserves excited punctuation. Pass `punctuation=False` to return
+the greeting without punctuation.
+
 Run the configured commands with:
 
 ```bash
